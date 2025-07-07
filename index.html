@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>機器人地圖展示</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #eef;
+      margin: 0;
+      font-family: sans-serif;
+    }
+    #map {
+      width: 400px;
+      height: 400px;
+      background-color: #ddd;
+      border: 2px solid #333;
+      position: relative;
+      overflow: hidden;
+    }
+    #robot {
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+      top: 190px;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="map">
+    <div id="robot"></div>
+  </div>
+
+  <script>
+    const robot = document.getElementById("robot");
+    let x = 0;
+    let y = 190;
+    let direction = 1;
+
+    function moveRobot() {
+      x += direction * 2;
+      if (x >= 380 || x <= 0) {
+        direction *= -1;
+      }
+      robot.style.left = `${x}px`;
+      requestAnimationFrame(moveRobot);
+    }
+
+    moveRobot();
+  </script>
+</body>
+</html>
