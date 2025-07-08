@@ -1,59 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>機器人地圖展示</title>
+  <meta charset="UTF-8">
+  <title>Foxglove Studio Layout - Robot UI</title>
   <style>
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #eef;
-      margin: 0;
       font-family: sans-serif;
+      margin: 40px;
+      background: #f4f4f4;
+      color: #333;
     }
-    #map {
-      width: 400px;
-      height: 400px;
-      background-color: #ddd;
-      border: 2px solid #333;
-      position: relative;
-      overflow: hidden;
+    pre {
+      background: #fff;
+      padding: 20px;
+      overflow-x: auto;
+      border: 1px solid #ccc;
+      max-height: 500px;
     }
-    #robot {
-      width: 20px;
-      height: 20px;
-      background-color: red;
-      border-radius: 50%;
-      position: absolute;
-      top: 190px;
-      left: 0;
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #248eff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-  <div id="map">
-    <div id="robot"></div>
-  </div>
+  <h1>🚀 Foxglove Studio Layout - Robot UI</h1>
+
+  <p>這是我在 Foxglove Studio 製作的機器人視覺化 layout。</p>
+
+  <a class="button" href="robot UI.json" download>⬇️ 下載 robot UI.json</a>
+
+  <h2>📘 如何使用此 layout</h2>
+  <ol>
+    <li>前往 <a href="https://studio.foxglove.dev" target="_blank">https://studio.foxglove.dev</a></li>
+    <li>點選左上角選單 → <strong>File → Import layout</strong></li>
+    <li>選擇剛下載的 <code>robot UI.json</code></li>
+  </ol>
+
+  <h2>📝 Layout JSON 預覽</h2>
+  <pre id="jsonPreview">載入中...</pre>
 
   <script>
-    const robot = document.getElementById("robot");
-    let x = 0;
-    let y = 190;
-    let direction = 1;
-
-    function moveRobot() {
-      x += direction * 2;
-      if (x >= 380 || x <= 0) {
-        direction *= -1;
-      }
-      robot.style.left = `${x}px`;
-      requestAnimationFrame(moveRobot);
-    }
-
-    moveRobot();
+    fetch('robot UI.json')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('jsonPreview').textContent =
+          JSON.stringify(data, null, 2);
+      })
+      .catch(err => {
+        document.getElementById('jsonPreview').textContent = '載入 JSON 失敗';
+      });
   </script>
 </body>
 </html>
